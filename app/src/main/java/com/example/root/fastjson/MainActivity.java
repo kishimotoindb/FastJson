@@ -10,6 +10,17 @@ import com.alibaba.fastjson.JSON;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/*
+ * FastJSON方法说明:
+ * 1.Json.toJsonString():返回一个完整的json字符串,"{'a':{"name",1},'b':2}";
+ * 2.Json.parse(jsonString):返回一个Map<String,Object>,String为jsonString最外层的字段,Object为每个字段的value.
+ * 3.Json.parseObject(jsonString,xx.class):返回一个xx类型的对象,对象的字段值由jsonString解析出来.
+ *
+ *
+ *
+ *
+ */
 /*
  * 问题列表：
  * 1.Json.toJsonString(Map<String,String>)和Json.toJsonString(Map<String,Object>)分别返回的是什么格式的
@@ -27,7 +38,6 @@ import java.util.Map;
  * map包含两个元素:1.<a,1> 2.<b,2>
  */
 
-
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTv;
@@ -42,12 +52,13 @@ public class MainActivity extends AppCompatActivity {
 //        Log.i("xiong", "JSON.toJSONString(cui)" + JSON.toJSONString(cui));
 //        Map<String, Object> map =  (Map<String, Object>) JSON.parse(JSON.toJSONString(cui));
 
-        //问题1
+//问题1
         HashMap<String, String> map = new HashMap<>();
         map.put("key1", "string1");
         map.put("key2", "string2");
         map.put("key3", "string3");
         String s = JSON.toJSONString(map); //s={"key2":"string2","key1":"string1","key3":"string3"}
+
 
         Person a = new Person("a", 1);
         Person b = new Person("b", 2);
@@ -57,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
         map1.put("p2", b);
         map1.put("p3", c);
         String s1 = JSON.toJSONString(map1); //s1={"p3":{"age":3,"name":"c"},"p2":{"age":2,"name":"b"},"p1":{"age":1,"name":"a"}}
+
+        HashMap<String, Object> map2 = new HashMap<>();
+        map2.put("p1", 1);
+        map2.put("p2", 2);
+        map2.put("p3", 3);
+        String s2 = JSON.toJSONString(map2); //s2={"p3":3,"p2":2,"p1":1}
+//问题1
+
 
         //2.用于判断：fastjson解析的数据类型是根据对象还是json本身
 //        String json2="{\"a\":\"1.2\"}";
